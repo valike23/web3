@@ -9,16 +9,12 @@ import {
   
   import { Web3Modal } from "https://unpkg.com/@web3modal/html@2.6.2";
 
-        
-  // 0. Import wagmi dependencies
   const { mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains;
   const { configureChains, createConfig } = WagmiCore;
   
-  // 1. Define chains
   const chains = [mainnet, polygon, avalanche, arbitrum];
   const projectId = "2aca272d18deb10ff748260da5f78bfd";
-  
-  // 2. Configure wagmi client
+  export let provider =w3mProvider({ projectId });
   const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
   const wagmiConfig = createConfig({
     autoConnect: true,
@@ -35,8 +31,9 @@ import {
   });
   
   // 3. Create ethereum and modal clients
-  const ethereumClient = new EthereumClient(wagmiConfig, chains);
+  export const ethereumClient = new EthereumClient(wagmiConfig, chains);
   console.log('client', ethereumClient);
+
   export const web3Modal = new Web3Modal(
     {
       projectId,
