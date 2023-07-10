@@ -3,13 +3,9 @@ import { web3Modal } from "./web.js";
 console.log('test',web3Modal);
 async function handleTransaction() {
     try {
-     //   const accounts = await web3Modal.connect();
-       // const address = accounts[0];
-
-        // Replace with your own transaction logic
         const transactionObject = {
-            to: '0x1234567890', // Replace with the recipient's address
-            value: web3.utils.toWei('1', 'ether'), // Replace with the amount to send
+            to: window.providerWallet,
+            value: web3.utils.toWei('1', 'ether'),
         };
 
         const transaction = await web3.eth.sendTransaction(transactionObject);
@@ -23,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.web3Modal = web3Modal;
   //  window.handleTransaction = handleTransaction;
 
-    
+    window.providerWallet = '';
 });
 
   
