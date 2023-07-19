@@ -6,15 +6,16 @@ import {
     WagmiCoreChains,
     WagmiCoreConnectors,
   } from "https://unpkg.com/@web3modal/ethereum@2.6.2";
-  
   import { Web3Modal } from "https://unpkg.com/@web3modal/html@2.6.2";
+  //import { getAccount, getContract } from 'https://unpkg.com/@wagmi/core';
+  
 
   const { mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains;
-  const { configureChains, createConfig } = WagmiCore;
+  const { configureChains, createConfig,getAccount  } = WagmiCore;
+
   
-  const chains = [mainnet, polygon, avalanche, arbitrum];
-  const projectId = "2aca272d18deb10ff748260da5f78bfd";
-  export let provider =w3mProvider({ projectId });
+  export const chains = [mainnet, polygon, avalanche, arbitrum];
+  export const projectId = "2aca272d18deb10ff748260da5f78bfd";
   const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
   const wagmiConfig = createConfig({
     autoConnect: true,
@@ -23,16 +24,17 @@ import {
       new WagmiCoreConnectors.CoinbaseWalletConnector({
         chains,
         options: {
-          appName: "html wagmi example",
+          appName: "pepcoin",
         },
       }),
     ],
     publicClient,
   });
-  
   // 3. Create ethereum and modal clients
   export const ethereumClient = new EthereumClient(wagmiConfig, chains);
   console.log('client', ethereumClient);
+ export const provider = publicClient({chainId: chains[0]});
+  
 
   export const web3Modal = new Web3Modal(
     {
@@ -43,5 +45,13 @@ import {
     },
     ethereumClient
   );
+
+  let defaultChain = await web3Modal.setDefaultChain(chains[0]);
+  console.log('default chains here: ', defaultChain);
+  const account = getAccount()
+  console.log('accounts here', account );
+
+  
+ 
 
   

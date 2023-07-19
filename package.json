@@ -11,5 +11,7 @@
     "js"
   ],
   "author": "anonymous",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+  }
 }
