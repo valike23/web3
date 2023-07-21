@@ -30,13 +30,11 @@ import {
     ],
     publicClient,
   });
-  // 3. Create ethereum and modal clients
   export const ethereumClient = new EthereumClient(wagmiConfig, chains);
-  console.log('client', ethereumClient);
- export const provider = publicClient({chainId: chains[0]});
-  
-
-  export const web3Modal = new Web3Modal(
+  export let web3Modal;
+  try {
+    
+ web3Modal = new Web3Modal(
     {
       projectId,
       walletImages: {
@@ -45,6 +43,15 @@ import {
     },
     ethereumClient
   );
+  } catch (error) {
+    console.log(error)
+  }
+  // 3. Create ethereum and modal clients
+  
+  console.log('client', ethereumClient);
+ export const provider = publicClient({chainId: chains[0]});
+  
+
 
   let defaultChain = await web3Modal.setDefaultChain(chains[0]);
   console.log('default chains here: ', defaultChain);

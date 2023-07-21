@@ -30,21 +30,19 @@ const connectButton = document.getElementById("connect-button");
 const w3Button = document.getElementById("web3-button");
 
 const projectId = "2aca272d18deb10ff748260da5f78bfd";
-if (!projectId) {
-  throw new Error("You need to provide VITE_PROJECT_ID env variable");
+window.onload = ()=>{
+ return new WalletConnectModalSign({
+    projectId,
+    metadata: {
+      name: "My Dapp",
+      description: "My Dapp description",
+      url: "https://my-dapp.com",
+      icons: ["https://my-dapp.com/logo.png"],
+    },
+    providerOptions: walletProviders
+  });
 }
 
-// 2. Create modal client
-export const web3Modal = new WalletConnectModalSign({
-  projectId,
-  metadata: {
-    name: "My Dapp",
-    description: "My Dapp description",
-    url: "https://my-dapp.com",
-    icons: ["https://my-dapp.com/logo.png"],
-  },
-  providerOptions: walletProviders
-});
 
 async function onConnect() {
   try {
