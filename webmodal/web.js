@@ -13,10 +13,12 @@ import {
   const { mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains;
   const { configureChains, createConfig,getAccount  } = WagmiCore;
 
-  
   export const chains = [mainnet, polygon, avalanche, arbitrum];
-  export const projectId = "2aca272d18deb10ff748260da5f78bfd";
-  const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
+  export const projectId = "7cf9e2e6c54e2bf44d82eb56001e2d11";
+  const clients = configureChains(chains, [w3mProvider({ projectId })]);
+  const publicClient = clients.publicClient;
+  console.log("clients here", clients, "public client here", publicClient);
+  console.log('wallet connect wagmi', WagmiCoreConnectors);
   const wagmiConfig = createConfig({
     autoConnect: true,
     connectors: [
@@ -40,8 +42,8 @@ import {
       walletImages: {
         safe: "https://pbs.twimg.com/profile_images/1566773491764023297/IvmCdGnM_400x400.jpg",
       },
-    },
-    ethereumClient
+    }
+    ,ethereumClient
   );
   } catch (error) {
     console.log(error)
@@ -55,8 +57,6 @@ import {
 
   let defaultChain = await web3Modal.setDefaultChain(chains[0]);
   console.log('default chains here: ', defaultChain);
-  const account = getAccount()
-  console.log('accounts here', account );
 
   
  
