@@ -29,6 +29,13 @@ import {
           appName: "pepcoin",
         },
       }),
+      new WagmiCoreConnectors.MetaMaskConnector({
+        chains,
+        options: {
+          appName: "pepcoin",
+        },
+      }),
+      
     ],
     publicClient,
   });
