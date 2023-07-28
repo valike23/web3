@@ -17,19 +17,16 @@ import {
   export const projectId = "7cf9e2e6c54e2bf44d82eb56001e2d11";
   const clients = configureChains(chains, [w3mProvider({ projectId })]);
   const publicClient = clients.publicClient;
-  console.log("clients here", clients, "public client here", publicClient);
-  console.log('wallet connect wagmi', WagmiCoreConnectors);
+  console.log("clients here", w3mProvider, "public client here", publicClient);
+  console.log('wallet connect wagmi', w3mConnectors);
   const wagmiConfig = createConfig({
     autoConnect: true,
     connectors: [
-      ...w3mConnectors({ chains, version: 2, projectId }),
-      new WagmiCoreConnectors.CoinbaseWalletConnector({
-        chains,
-        options: {
-          appName: "pepcoin",
-        },
-      }),
       new WagmiCoreConnectors.MetaMaskConnector({
+        chains,
+       
+      }),
+      new WagmiCoreConnectors.CoinbaseWalletConnector({
         chains,
         options: {
           appName: "pepcoin",
@@ -50,6 +47,7 @@ import {
         },
         
       }),
+      ...w3mConnectors({ chains, version: 2, projectId }),
       
     ],
     publicClient,
