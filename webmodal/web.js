@@ -35,6 +35,21 @@ import {
           appName: "pepcoin",
         },
       }),
+      new WagmiCoreConnectors.InjectedConnector({
+        chains,
+        options: {
+          shimDisconnect: false,
+        },
+        
+      }),
+      new WagmiCoreConnectors.LedgerConnector({
+        chains,
+        options: {
+          projectId,
+          enableDebugLogs: true,
+        },
+        
+      }),
       
     ],
     publicClient,
